@@ -17,6 +17,11 @@ defmodule EliriaWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+
+    get "/login", LoginController, :redirect_to
+    get "/logout", LoginController, :redirect_to
+    post "/login", LoginController, :login
+    post "/logout", LoginController, :logout
     resources "/users", UserController
   end
 

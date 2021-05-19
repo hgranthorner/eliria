@@ -12,10 +12,30 @@
     <header class="flex items-center justify-center">
       <h1>Eliria</h1>
     </header>
-    <main role="main" class="container">
+    <main role="main">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <%= @inner_content %>
+      <div class="flex flex-col items-center justify-center">
+      <span class="hidden"><%= username = EliriaWeb.Helpers.get_username(@conn) %></span>
+      <%= if username != nil do %>
+        <div class="flex items-center justify-center">
+          <p>Hello <%= username %></p>
+          <%= form_tag "/logout", method: "post" do %>
+            <button type="submit" class="bg-red-100 rounded p-1">Logout</button>
+          <%= end %>
+        </div>
+        <ul class="flex items-center justify-around bg-gray-100 w-full">
+          <li><a href="/tasks">Tasks</a></li>
+          <li><a href="/users">Users</a></li>
+        </ul>
+        <%= @inner_content %>
+      <%= else %>
+        <%= form_tag "/login", method: "post" do %>
+          <input type="text" name="username" class="border-solid p-1 border-gray-300 border">
+          <button type="submit" class="bg-green-100 rounded p-1">Submit</button>
+        <%= end %>
+      <%= end %>
+      </div>
     </main>
   </body>
 </html>

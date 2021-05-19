@@ -26,6 +26,10 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :eliria, AuthMe.UserManager.Guardian,
+  issuer: "eliria",
+  secret_key: "Cl3j/ffDYFPNvtwbT5smYcoQWOBfEwPP6kG6ygGuWh2rIzfDMaDl7pIUoH/viknI"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
